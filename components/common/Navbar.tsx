@@ -30,10 +30,10 @@ const Navbar = () => {
           <NavbarItem href="/movies" text="Movies" />
         </li>
         <li>
-          <NavbarItem href="/series" text="Series" />
+          <NavbarItem href="/" text="Series" />
         </li>
         <li>
-          <NavbarItem href="/tvshows" text="TV Shows" />
+          <NavbarItem href="/" text="TV Shows" />
         </li>
       </ul>
     </nav>

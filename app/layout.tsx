@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins } from "@next/font/google";
 import Navbar from "@/components/common/Navbar";
+import Pwa from "./Pwa";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="max-h-screen">{children}</div>
         </div>
+        <Pwa />
         {/* <div className="grid grid-cols-[minmax(0,_0.18fr)_minmax(0,_1fr)] max-h-full">
           <div>
             <Sidebar />
