@@ -38,23 +38,25 @@ type TimeState = "day" | "week";
 const TrendingMovies: React.FC<WithScrollProps> = ({ swiper, apiEndpoint, keyPrefix, loadingState }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [media, setMedia] = useState<MediaState | any>(searchParams.get("media") || "movie");
-  const [time, setTime] = useState<TimeState | any>(searchParams.get("time") || "day");
+  // const [media, setMedia] = useState<MediaState | any>(searchParams.get("media") || "movie");
+  // const [time, setTime] = useState<TimeState | any>(searchParams.get("time") || "day");
+  const media = "movie";
+  const time = "day";
   const { data, isLoading, error } = useSWR(`/trending/${media}/${time}`, fetcher);
 
-  const handleMedia = (media: MediaState) => {
-    setMedia(media);
-  };
+  // const handleMedia = (media: MediaState) => {
+  //   setMedia(media);
+  // };
 
-  useEffect(() => {
-    router.replace(`/?media=${media}&time=${time}`);
-  }, [time, media, router]);
+  // useEffect(() => {
+  //   router.replace(`/?media=${media}&time=${time}`);
+  // }, [time, media, router]);
 
   if (isLoading) return <Skeleton />;
 
   return (
     <>
-      <div className="inline-flex gap-4 mb-4">
+      {/* <div className="inline-flex gap-4 mb-4">
         <div className="flex-center w-fit border border-blue-500/50 rounded-full overflow-hidden">
           <button className={`btn-filter ${media === "all" && "bg-blue-500"}`} onClick={() => handleMedia("all")}>
             All
@@ -75,7 +77,7 @@ const TrendingMovies: React.FC<WithScrollProps> = ({ swiper, apiEndpoint, keyPre
             Week
           </button>
         </div>
-      </div>
+      </div> */}
       <section className="card-movie-container" ref={swiper}>
         {data.results.map((movie: Movie) => (
           <MovieCard key={`trendingMovies-${movie.id}`} movie={movie} />
