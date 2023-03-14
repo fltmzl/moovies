@@ -5,7 +5,7 @@ import { MdOutlineArrowBack } from "react-icons/md";
 
 const HeaderDetailPage = ({ movie }: { movie: Movie }) => {
   return (
-    <header className="px-10 flex-y-center gap-10 py-7 bg-slate-700">
+    <header className="container-base mt-20 flex-y-center gap-10 bg-slate-700">
       <div>
         <Image
           className="object-contain rounded-xl"

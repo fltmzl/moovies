@@ -11,7 +11,7 @@ const MovieCardWrapperWithScroll = ({ apiEndpoint, keyPrefix, loadingState, sect
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-5 pb-3 border-b border-slate-400/10">{sectionTitle}</h2>
+      <h2 className="text-xl font-semibold mb-3 pb-3 border-b border-slate-400/10">{sectionTitle}</h2>
       <div className="card-movie-container_with-scroll">
         {data?.results.map((movie) => (
           <SmallMovieCard key={`${keyPrefix}-${movie.id}`} movie={movie} />

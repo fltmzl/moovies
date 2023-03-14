@@ -2,7 +2,7 @@ import MoviesCardWrapper from "../MoviesCardWrapper";
 
 const Movies = () => {
   return (
-    <main className="main-container">
+    <main className="container-base pt-20">
       <MoviesCardWrapper sectionTitle="Discover Movie" apiEndpoint="/discover/movie" cardSize="lg" keyPrefix="dicoverMovie" loadingState={"Loading Discover"} />
       <MoviesCardWrapper sectionTitle="Now Playing Movies" apiEndpoint="/movie/now_playing" keyPrefix="nowPlayingMovie" loadingState={"Loading Now Playing Movies"} />
       <MoviesCardWrapper sectionTitle="Upcoming Movies" apiEndpoint="/movie/upcoming" keyPrefix="upcomingMovies" loadingState={"Loading Upcoming Movies"} />

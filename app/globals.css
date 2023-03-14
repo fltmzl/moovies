@@ -54,7 +54,7 @@
   }
 
   .nav-link {
-    @apply py-3 block;
+    @apply block;
   }
 
   .sidebar-link-active {
@@ -73,6 +73,14 @@
 }
 
 @layer components {
+  .container-base {
+    @apply px-5 lg:px-10 py-5;
+  }
+
+  /* .container-base {
+    padding: 2.5rem 1.25rem;
+  } */
+
   .btn-sec {
     @apply px-4 py-2 rounded-lg bg-slate-50/20 backdrop-blur-lg;
   }
@@ -82,7 +90,7 @@
   }
 
   .btn-filter {
-    @apply px-5 py-2 text-sm rounded-full;
+    @apply px-4 md:px-5 py-2 text-[9px] md:text-sm rounded-full;
   }
 
   .card-movie-container {

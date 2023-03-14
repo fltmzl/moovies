@@ -8,7 +8,7 @@ const Logos = ({ params }: { params: { id: string } }) => {
   const { data: images, isLoading, error } = useGetImages(params.id);
 
   return (
-    <section className="px-10 mb-14">
+    <section>
       <h2 className="text-xl py-2 mb-5 inline-block border-b-2 border-slate-600 font-semibold">Logos</h2>
 
       {isLoading ? (
@@ -16,7 +16,7 @@ const Logos = ({ params }: { params: { id: string } }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-5 gap-7">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-7">
           {images?.logos?.map((logo) => (
             <div key={logo.file_path} className="relative aspect-[6/4]">
               <Image

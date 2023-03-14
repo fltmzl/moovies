@@ -8,7 +8,7 @@ const Backdrops = ({ params }: { params: { id: string } }) => {
   const { data: images, isLoading, error } = useGetImages(params.id);
 
   return (
-    <section className="px-10 mb-14">
+    <section>
       <h2 className="text-xl py-2 mb-5 inline-block border-b-2 border-slate-600 font-semibold">Backdrops</h2>
 
       {isLoading ? (
@@ -16,7 +16,7 @@ const Backdrops = ({ params }: { params: { id: string } }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-7">
           {images?.backdrops?.map((backdrop) => (
             <div key={backdrop.file_path} className="relative aspect-[7/4]">
               <Image
@@ -30,6 +30,12 @@ const Backdrops = ({ params }: { params: { id: string } }) => {
               />
             </div>
           ))}
+        </div>
+      )}
+
+      {images?.backdrops?.length! <= 0 && (
+        <div className="w-full h-40 flex-center">
+          <p>There are no backdrops yet</p>
         </div>
       )}
     </section>

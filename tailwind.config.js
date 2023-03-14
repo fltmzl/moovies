@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-poppins)', "sans-serif", "arial"],
       },
+      screens: {
+        "xs": "320px"
+      },
     },
   },
   plugins: [],

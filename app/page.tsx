@@ -15,7 +15,7 @@ export default function Home() {
   // const data = await getData();
 
   return (
-    <main className="main-container">
+    <main className="container-base pt-20">
       <Trending sectionTitle="Trending" apiEndpoint="/trending" keyPrefix="trending" loadingState={<p>Loading Trending...</p>} />
       <TopRatedMovies sectionTitle="Top Rated Movie" apiEndpoint="/movie/top_rated" keyPrefix="top-rated-movies" loadingState={<p>Loading Top Rated Movies...</p>} />
     </main>

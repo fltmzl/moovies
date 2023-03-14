@@ -6,10 +6,10 @@ const ImagesLayout = async ({ children, params }: { children: React.ReactNode; p
   const movie: Movie = await getMovie(params.id);
 
   return (
-    <div className="py-16">
+    <div>
       <HeaderDetailPage movie={movie} />
       <SubNavbar movieId={movie.id} />
-      {children}
+      <div className="container-base">{children}</div>
     </div>
   );
 };

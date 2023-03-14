@@ -34,7 +34,7 @@ const SubNavbarItem = ({ dropdown, title }: SubNavbarItemProps) => {
 
 const SubNavbar = ({ movieId }: { movieId: number }) => {
   return (
-    <div className="py-10 flex justify-center">
+    <div className="container-base flex-x-center text-sm md:text-base">
       <ul className="flex gap-7">
         <SubNavbarItem
           title="Overview"

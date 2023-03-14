@@ -39,7 +39,7 @@ const Reviews = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <section className="px-10 mb-14">
+    <section>
       <h2 className="text-xl py-2 mb-5 inline-block border-b-2 border-slate-600 font-semibold">Reviews</h2>
 
       {pages}
@@ -48,6 +48,12 @@ const Reviews = ({ params }: { params: { id: string } }) => {
           <button onClick={() => setPage(page + 1)} className="btn-pri">
             Load More
           </button>
+        </div>
+      )}
+
+      {reviews?.results?.length! <= 0 && (
+        <div className="w-full h-40 flex-center">
+          <p>There are no reviews yet</p>
         </div>
       )}
     </section>

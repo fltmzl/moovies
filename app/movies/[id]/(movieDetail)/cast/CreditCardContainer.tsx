@@ -15,7 +15,7 @@ const CreditCardContainer = ({ credits, creditsType }: Props) => {
 
   return (
     <div className="relative">
-      <div className={`grid grid-cols-12 gap-7 duration-300 overflow-hidden ${showMore ? "h-full" : "max-h-[400px]"}`}>
+      <div className={`grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-10 gap-7 duration-300 overflow-hidden ${showMore ? "h-full" : "max-h-[400px]"}`}>
         {creditsType === "cast" && (
           <>
             {credits?.cast?.map((castItem) => (
