@@ -1,7 +1,5 @@
 "use client";
 
-import { fetcher } from "@/utils";
-import useSWR from "swr";
 import { AiFillStar } from "react-icons/ai";
 import { useState } from "react";
 import { getReadableDate } from "@/utils/common";
@@ -25,7 +23,7 @@ export const ReviewCard = ({ review }: { review: Review }) => {
         <AiFillStar className={`${author_details.rating > 8 ? "text-blue-400" : "text-blue-400/30"} `} />
         <AiFillStar className={`${author_details.rating > 10 ? "text-blue-400" : "text-blue-400/30"} `} />
       </div>
-      <div className="max-h-44 small-scroll overflow-auto">{textContent}</div>
+      <div className={`max-h-44 small-scroll ${isReadMore ? "overflow-scroll" : "overflow-hidden"}`}>{textContent}</div>
       <div className="mt-1">
         <button className="text-blue-400 hover:underline underline-offset-2" onClick={handleReadMore}>
           {isReadMore ? "Read Less" : "Read More"}
