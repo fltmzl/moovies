@@ -3,7 +3,7 @@ export const scrollElement = (direction: "left" | "right", element: React.RefObj
   return (element.current!.scrollLeft += scrollValue);
 };
 
-export const getGenreString = (movie: MovieDetail): string => {
+export const getGenreString = (movie: MovieDetail | TVDetail): string => {
   const genreArray = movie?.genres?.map((genre) => genre.name);
   const genreString = genreArray?.join(", ");
   return genreString;

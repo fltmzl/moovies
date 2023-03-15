@@ -1,4 +1,4 @@
-import TopRatedMovies from "./movies/TopRatedMovies";
+import TopRatedMovies from "./TopRatedMovies";
 import Trending from "./Trending";
 
 // async function getData() {
@@ -16,8 +16,8 @@ export default function Home() {
 
   return (
     <main className="container-base pt-20">
-      <Trending sectionTitle="Trending" apiEndpoint="/trending" keyPrefix="trending" loadingState={<p>Loading Trending...</p>} />
-      <TopRatedMovies sectionTitle="Top Rated Movie" apiEndpoint="/movie/top_rated" keyPrefix="top-rated-movies" loadingState={<p>Loading Top Rated Movies...</p>} />
+      <Trending />
+      <TopRatedMovies />
     </main>
   );
 }

@@ -3,6 +3,7 @@
 import Spinner from "@/components/common/Spinner";
 import useGetImages from "@/hooks/useGetImages";
 import Image from "next/image";
+import noImage from "@/public/images/no-image.png";
 
 const Backdrops = ({ params }: { params: { id: string } }) => {
   const { data: images, isLoading, error } = useGetImages(params.id);
@@ -20,7 +21,7 @@ const Backdrops = ({ params }: { params: { id: string } }) => {
           {images?.backdrops?.map((backdrop) => (
             <div key={backdrop.file_path} className="relative aspect-[7/4]">
               <Image
-                src={`https://image.tmdb.org/t/p/w780${backdrop.file_path}`}
+                src={backdrop?.file_path ? `https://image.tmdb.org/t/p/w780${backdrop.file_path}` : noImage}
                 alt={"backdrop image"}
                 fill
                 className="object-cover rounded-2xl"

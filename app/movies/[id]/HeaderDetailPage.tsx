@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { MdOutlineArrowBack } from "react-icons/md";
+import noImage from "@/public/images/no-image.png";
 
 const HeaderDetailPage = ({ movie }: { movie: Movie }) => {
   return (
@@ -9,7 +10,7 @@ const HeaderDetailPage = ({ movie }: { movie: Movie }) => {
       <div>
         <Image
           className="object-contain rounded-xl"
-          src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+          src={movie?.poster_path ? `https://image.tmdb.org/t/p/original${movie?.poster_path}` : noImage}
           alt={`${movie?.title} poster`}
           width={110}
           height={200}

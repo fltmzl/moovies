@@ -1,3 +1,6 @@
+"use client";
+
+import useDropdown from "@/hooks/useDropdown";
 import Link from "next/link";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
@@ -10,24 +13,28 @@ interface SubNavbarItemProps {
 }
 
 const SubNavbarItem = ({ dropdown, title }: SubNavbarItemProps) => {
+  const { dropdownRef, isDropdownOpen, toggleDropdown } = useDropdown<HTMLLIElement>();
+
   return (
-    <li className="cursor-pointer relative group">
+    <li className="cursor-pointer relative" role="button" tabIndex={0} onClick={toggleDropdown} ref={dropdownRef}>
       <span className="flex-center gap-2">
         <span>{title}</span>
         {dropdown?.length && <MdKeyboardArrowDown className="text-wh" />}
       </span>
 
-      <div className="hidden group-hover:block absolute top-full min-w-[100px] bg-white shadow-xl overflow-hidden rounded-lg z-20">
-        <ul>
-          {dropdown?.map((item) => (
-            <li key={item.link}>
-              <Link href={item.link} className="text-slate-900 px-4 py-2 divide-y divide-gray-500 hover:bg-gray-300 duration-300 block">
-                {item.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isDropdownOpen && (
+        <div className="absolute top-full min-w-[100px] bg-white shadow-xl overflow-hidden rounded-lg z-20">
+          <ul>
+            {dropdown?.map((item) => (
+              <li key={item.link}>
+                <Link href={item.link} className="text-slate-900 px-4 py-2 divide-y divide-gray-500 hover:bg-gray-300 duration-300 block">
+                  {item.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </li>
   );
 };

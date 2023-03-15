@@ -2,10 +2,8 @@
 
 import MovieCard from "@/components/card/MovieCard";
 import useSWR from "swr";
-import withScroll, { WithScrollProps } from "@/components/common/withScroll";
 import { fetcher } from "@/utils";
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 const Skeleton = () => {
   return (
@@ -35,7 +33,7 @@ const Skeleton = () => {
 type MediaState = "all" | "movie" | "tv";
 type TimeState = "day" | "week";
 
-const TrendingMovies: React.FC<WithScrollProps> = ({ swiper, apiEndpoint, keyPrefix, loadingState }) => {
+const TrendingMovies = () => {
   const [media, setMedia] = useState<MediaState | any>("movie");
   const [time, setTime] = useState<TimeState | any>("day");
   const { data, isLoading, error } = useSWR(`/trending/${media}/${time}`, fetcher);
@@ -44,10 +42,12 @@ const TrendingMovies: React.FC<WithScrollProps> = ({ swiper, apiEndpoint, keyPre
     setMedia(media);
   };
 
-  if (isLoading) return <Skeleton />;
-
   return (
-    <>
+    <section>
+      <div className="mb-5">
+        <h1 className="text-xl font-semibold">Trending</h1>
+      </div>
+
       <div className="inline-flex gap-4 mb-4">
         <div className="flex-center w-fit border border-blue-500/50 rounded-full overflow-hidden">
           <button className={`btn-filter ${media === "all" && "bg-blue-500"}`} onClick={() => handleMedia("all")}>
@@ -70,13 +70,19 @@ const TrendingMovies: React.FC<WithScrollProps> = ({ swiper, apiEndpoint, keyPre
           </button>
         </div>
       </div>
-      <section className="card-movie-container" ref={swiper}>
-        {data.results.map((movie: Movie) => (
-          <MovieCard key={`trendingMovies-${movie.id}`} movie={movie} />
-        ))}
-      </section>
-    </>
+
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <div className="card-movie-container">
+          {data.results.map((movie: Movie & TV) => {
+            const type = movie.title ? "movie" : "tv";
+            return <MovieCard key={`trendingMovies-${movie.id}`} type={type} data={movie} />;
+          })}
+        </div>
+      )}
+    </section>
   );
 };
 
-export default withScroll(TrendingMovies);
+export default TrendingMovies;

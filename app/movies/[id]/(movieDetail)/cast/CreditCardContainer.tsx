@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CastCard } from "../../CastList";
+import { CastCard } from "../../../../../components/part/movieOrTvDetails/CastList";
 
 interface Props {
   credits: Credits;

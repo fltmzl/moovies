@@ -3,6 +3,7 @@
 import Spinner from "@/components/common/Spinner";
 import useGetImages from "@/hooks/useGetImages";
 import Image from "next/image";
+import noImage from "@/public/images/no-image.png";
 
 const Posters = ({ params }: { params: { id: string } }) => {
   const { data: images, isLoading, error } = useGetImages(params.id);
@@ -20,7 +21,7 @@ const Posters = ({ params }: { params: { id: string } }) => {
           {images?.posters?.map((poster) => (
             <div key={poster.file_path} className="relative aspect-[6/9]">
               <Image
-                src={`https://image.tmdb.org/t/p/w780${poster.file_path}`}
+                src={poster.file_path ? `https://image.tmdb.org/t/p/w780${poster.file_path}` : noImage}
                 alt={"poster image"}
                 fill
                 className="object-cover rounded-2xl"

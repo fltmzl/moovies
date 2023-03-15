@@ -3,6 +3,7 @@
 import Spinner from "@/components/common/Spinner";
 import useGetImages from "@/hooks/useGetImages";
 import Image from "next/image";
+import noImage from "@/public/images/no-image.png";
 
 const Logos = ({ params }: { params: { id: string } }) => {
   const { data: images, isLoading, error } = useGetImages(params.id);
@@ -20,7 +21,7 @@ const Logos = ({ params }: { params: { id: string } }) => {
           {images?.logos?.map((logo) => (
             <div key={logo.file_path} className="relative aspect-[6/4]">
               <Image
-                src={`https://image.tmdb.org/t/p/w780${logo.file_path}`}
+                src={logo.file_path ? `https://image.tmdb.org/t/p/w780${logo.file_path}` : noImage}
                 alt={"logo image"}
                 fill
                 className="object-cover rounded-2xl"

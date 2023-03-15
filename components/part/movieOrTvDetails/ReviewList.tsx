@@ -39,32 +39,37 @@ export const ReviewCard = ({ review }: { review: Review }) => {
   );
 };
 
-const ReviewList = ({ movieId }: { movieId: number }) => {
-  const { data, isLoading, error } = useGetReviews(movieId?.toString(), 1);
+const ReviewList = ({ movieId, type }: { movieId: number; type: "movie" | "tv" }) => {
+  const { data, isLoading, error } = useGetReviews(movieId?.toString(), 1, type);
 
   if (isLoading) return <p>Loading Reviews</p>;
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-      {data?.total_results === 0 ? (
-        <p>There are no reviews yet</p>
-      ) : (
-        <>
-          {data?.results.map((review) => (
-            <ReviewCard key={review.id + review.created_at} review={review} />
-          ))}
-        </>
-      )}
+    <section>
+      <h2 className="text-xl font-semibold mb-5 pb-3 border-b border-slate-400/10">Reviews</h2>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        {data?.total_results === 0 ? (
+          <p>There are no reviews yet</p>
+        ) : (
+          <>
+            {data?.results.map((review) => (
+              <ReviewCard key={review.id + review.created_at} review={review} />
+            ))}
+          </>
+        )}
 
-      <div className="flex-center">
-        <Link href={`/movies/${movieId}/reviews`} className="flex-center group space-x-2 hover:text-blue-500 duration-300">
-          <span>View all reviews</span>
-          <span className="inline-block group-hover:translate-x-3 duration-75">
-            <MdKeyboardArrowRight />
-          </span>
-        </Link>
+        {data?.results && (
+          <div className="flex-center">
+            <Link href={`/${type}/${movieId}/reviews`} className="flex-center group space-x-2 hover:text-blue-500 duration-300">
+              <span>View all reviews</span>
+              <span className="inline-block group-hover:translate-x-3 duration-75">
+                <MdKeyboardArrowRight />
+              </span>
+            </Link>
+          </div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 

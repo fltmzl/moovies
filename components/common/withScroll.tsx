@@ -9,6 +9,7 @@ export interface WithScrollProps {
   loadingState: React.ReactNode;
   keyPrefix: string;
   cardSize?: "sm" | "lg";
+  type: "movie" | "tv";
 }
 
 const withScroll = <P extends WithScrollProps>(Component: React.ComponentType<P>) => {

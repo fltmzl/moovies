@@ -1,9 +1,9 @@
 "use client";
 
+import useDropdown from "@/hooks/useDropdown";
 import useScroll from "@/hooks/useScroll";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MouseEvent, useEffect, useRef, useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import Brand from "./Brand";
 
@@ -17,12 +17,8 @@ const navbars = [
     href: "/movies",
   },
   {
-    text: "Series",
-    href: "/",
-  },
-  {
     text: "TV Shows",
-    href: "/",
+    href: "/tv",
   },
 ];
 
@@ -48,24 +44,7 @@ const NavbarItemMobile = ({ href, text }: { href: string; text: string }) => {
 
 const Navbar = () => {
   const { scrollY } = useScroll();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownRef]);
+  const { dropdownRef, isDropdownOpen, toggleDropdown } = useDropdown<HTMLDivElement>();
 
   return (
     <nav className={`container-base w-full flex-y-center justify-between lg:justify-center fixed top-0 z-50 transition-all duration-300 ${scrollY > 10 && "bg-slate-900"}`}>
@@ -80,7 +59,10 @@ const Navbar = () => {
       </ul>
 
       <div className="block md:hidden relative" ref={dropdownRef}>
-        <HiMenu onClick={toggleDropdown} className="text-xl" />
+        <button onClick={toggleDropdown} className="text-xl">
+          <HiMenu />
+        </button>
+
         {isDropdownOpen && (
           <div className="min-w-max bg-slate-800 shadow-2xl absolute top-full right-0 rounded-xl overflow-hidden">
             {navbars.map((navbar, index) => (

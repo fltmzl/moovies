@@ -1,13 +1,12 @@
 "use client";
 
 import Spinner from "@/components/common/Spinner";
+import { ReviewCard } from "@/components/part/movieOrTvDetails/ReviewList";
 import useGetReviews from "@/hooks/useGetReviews";
-import { ReviewCard } from "../../ReviewList";
 import { useState } from "react";
 
-const ReviewList = ({ movieId, pageIndex }: { movieId: string; pageIndex: number }) => {
-  const { data: reviews, isLoading, error } = useGetReviews(movieId, pageIndex);
-  console.log(reviews);
+const ReviewList = ({ movieId, pageIndex, type }: { movieId: string; pageIndex: number; type: "movie" | "tv" }) => {
+  const { data: reviews, isLoading, error } = useGetReviews(movieId, pageIndex, type);
 
   if (error) return <div>{error}</div>;
 
@@ -29,13 +28,13 @@ const ReviewList = ({ movieId, pageIndex }: { movieId: string; pageIndex: number
 };
 
 const Reviews = ({ params }: { params: { id: string } }) => {
-  const { data: reviews, isLoading, error } = useGetReviews(params.id, 1);
+  const { data: reviews, isLoading, error } = useGetReviews(params.id, 1, "movie");
 
   const [page, setPage] = useState(1);
 
   const pages = [];
   for (let i = 1; i <= page; i++) {
-    pages.push(<ReviewList movieId={params.id} pageIndex={i} key={i} />);
+    pages.push(<ReviewList movieId={params.id} pageIndex={i} type="movie" key={i} />);
   }
 
   return (

@@ -51,6 +51,15 @@ export const getMovie = async (id: string) => {
   return res.json();
 };
 
+export const getTv = async (id: string) => {
+  const apiEndpoint = `${baseUrl}/tv/${id}`;
+
+  const url = createFetchUrlFromApiEndpoint(apiEndpoint);
+
+  const res = await fetch(url);
+  return res.json();
+};
+
 export const getData = async (apiURL: string) => {
   const apiEndpoint = `${baseUrl}${apiURL}`;
 
