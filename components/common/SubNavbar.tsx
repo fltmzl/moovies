@@ -46,20 +46,20 @@ const SubNavbar = ({ movieId }: { movieId: number }) => {
         <SubNavbarItem
           title="Overview"
           dropdown={[
-            { text: "Main", link: `/movies/${movieId}` },
-            { text: "Cast", link: `/movies/${movieId}/cast` },
+            { text: "Main", link: `/movie/${movieId}` },
+            { text: "Cast", link: `/movie/${movieId}/cast` },
           ]}
         />
         <SubNavbarItem
           title="Media"
           dropdown={[
-            { text: "Backdrops", link: `/movies/${movieId}/images/backdrops` },
-            { text: "Posters", link: `/movies/${movieId}/images/posters` },
-            { text: "Logos", link: `/movies/${movieId}/images/logos` },
-            { text: "Videos", link: `/movies/${movieId}/videos` },
+            { text: "Backdrops", link: `/movie/${movieId}/images/backdrops` },
+            { text: "Posters", link: `/movie/${movieId}/images/posters` },
+            { text: "Logos", link: `/movie/${movieId}/images/logos` },
+            { text: "Videos", link: `/movie/${movieId}/videos` },
           ]}
         />
-        <Link href={`/movies/${movieId}/reviews?page=1`}>Reviews</Link>
+        <Link href={`/movie/${movieId}/reviews?page=1`}>Reviews</Link>
       </ul>
     </div>
   );

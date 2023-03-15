@@ -8,7 +8,7 @@ type MovieOrTVProps<T extends "movie" | "tv"> = {
 };
 
 const SmallMovieCard = <T extends "movie" | "tv">({ type, data }: MovieOrTVProps<T>) => {
-  let detailMovieHref = "title" in data ? `/movies/${data?.id}` : `/tv/${data?.id}`;
+  let detailMovieHref = "title" in data ? `/movie/${data?.id}` : `/tv/${data?.id}`;
 
   return (
     <Link href={detailMovieHref}>

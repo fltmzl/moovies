@@ -21,7 +21,7 @@ const HeaderDetailPage = ({ movie }: { movie: Movie }) => {
       </div>
       <div>
         <h1 className="text-3xl font-semibold">{movie?.title}</h1>
-        <Link href={`/movies/${movie?.id}`} className="text-slate-300 text-sm hover:underline">
+        <Link href={`/movie/${movie?.id}`} className="text-slate-300 text-sm hover:underline">
           <MdOutlineArrowBack className="inline-block mr-3" />
           <span>Back to main</span>
         </Link>

@@ -10,7 +10,7 @@ type MovieOrTVProps<T extends "movie" | "tv"> = {
 };
 
 const MovieCard = <T extends "movie" | "tv">({ data, type }: MovieOrTVProps<T>) => {
-  let detailMovieHref = type === "movie" ? `/movies/${data?.id}` : `/tv/${data?.id}`;
+  let detailMovieHref = type === "movie" ? `/movie/${data?.id}` : `/tv/${data?.id}`;
 
   return (
     <div className="flex-y-center min-w-[660px] aspect-[16/7] rounded-2xl overflow-hidden relative z-10">
