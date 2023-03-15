@@ -14,7 +14,7 @@ const navbars = [
   },
   {
     text: "Movies",
-    href: "/movies",
+    href: "/movie",
   },
   {
     text: "TV Shows",
