@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import useSWR from "swr";
 import noImage from "@/public/images/no-image.png";
+import RectangleSkeleton from "@/components/loading/RectangleSkeleton";
 
 const ImageCard = ({ image, isSpanCard = false }: { image: ImageObject; isSpanCard: boolean }) => {
   return (
@@ -26,27 +27,31 @@ const ImageCard = ({ image, isSpanCard = false }: { image: ImageObject; isSpanCa
 const ImageList = ({ movieId, type }: { movieId: number; type: "movie" | "tv" }) => {
   const { data, isLoading, error } = useSWR<Images>(`/${type}/${movieId}/images`, fetcher);
 
-  if (isLoading) return <p>Loading Images</p>;
-
   return (
     <section>
       <h2 className="text-xl font-semibold mb-5 pb-3 border-b border-slate-400/10">Photos</h2>
       <div className="grid gap-5 grid-cols-1 xl:grid-cols-2">
-        {data?.backdrops
-          .filter((image, index) => index < 4)
-          .map((image, index) => (
-            <ImageCard key={image.file_path} image={image} isSpanCard={index === 0} />
-          ))}
+        {isLoading ? (
+          <RectangleSkeleton />
+        ) : (
+          <>
+            {data?.backdrops
+              .filter((image, index) => index < 4)
+              .map((image, index) => (
+                <ImageCard key={image.file_path} image={image} isSpanCard={index === 0} />
+              ))}
 
-        {data?.backdrops && (
-          <div className="flex-center">
-            <Link href={`/${type}/${movieId}/images/backdrops`} className="flex-center group space-x-2 hover:text-blue-500 duration-300">
-              <span>View all photos</span>
-              <span className="inline-block group-hover:translate-x-3 duration-75">
-                <MdKeyboardArrowRight />
-              </span>
-            </Link>
-          </div>
+            {data?.backdrops && (
+              <div className="flex-center">
+                <Link href={`/${type}/${movieId}/images/backdrops`} className="flex-center group space-x-2 hover:text-blue-500 duration-300">
+                  <span>View all photos</span>
+                  <span className="inline-block group-hover:translate-x-3 duration-75">
+                    <MdKeyboardArrowRight />
+                  </span>
+                </Link>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

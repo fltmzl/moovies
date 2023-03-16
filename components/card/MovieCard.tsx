@@ -26,16 +26,7 @@ const MovieCard = <T extends "movie" | "tv">({ data, type }: MovieOrTVProps<T>) 
       <div className="flex-y-center absolute">
         <Link href={detailMovieHref}>
           <div className="basis-2/5 h-full p-5">
-            <Image
-              className="rounded-2xl"
-              src={data?.poster_path ? `https://image.tmdb.org/t/p/w342${data?.poster_path}` : noImage}
-              alt={`image`}
-              width={230}
-              height={250}
-              sizes="(max-width: 768px) 80vw
-              (max-width: 1200px) 50vw
-              30vw"
-            />
+            <Image className="rounded-2xl" src={data?.poster_path ? `https://image.tmdb.org/t/p/w342${data?.poster_path}` : noImage} alt={`image`} width={230} height={250} />
           </div>
         </Link>
 

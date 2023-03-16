@@ -30,26 +30,32 @@ export const CastCard = ({ cast }: { cast: Cast | Crew }) => {
   );
 };
 
+const skeleton = Array.from({ length: 10 }, (_, index) => <div key={index} className="min-w-[56px] aspect-[3/4] rounded-xl bg-gray-500/30 animate-pulse"></div>);
+
 const CastList = ({ movieId, type }: { movieId: number; type: "movie" | "tv" }) => {
   const { data, isLoading, error } = useSWR<Credits>(`/${type}/${movieId}/credits`, fetcher);
-
-  if (isLoading) return <p>Loading Cast</p>;
 
   return (
     <section>
       <h2 className="text-xl font-semibold mb-5 pb-3 border-b border-slate-400/10">Cast</h2>
-      <div className="flex gap-8 pb-7 overflow-auto">
-        {data?.cast
-          .filter((item) => item.order <= 10)
-          .map((item) => (
-            <CastCard key={`${item.order}_${item.id}`} cast={item} />
-          ))}
-        <div className="flex-center min-w-[70px] text-sm">
-          <Link href={`/${type}/${movieId}/cast`} className="hover:text-blue-400 group duration-300">
-            <span>View all cast</span>
-            <MdKeyboardArrowRight className="ml-2 group-hover:ml-4 inline-block duration-150" />
-          </Link>
-        </div>
+      <div className="flex flex-nowrap gap-8 pb-7 overflow-auto">
+        {isLoading ? (
+          <>{skeleton}</>
+        ) : (
+          <>
+            {data?.cast
+              .filter((item) => item.order <= 10)
+              .map((item) => (
+                <CastCard key={`${item.order}_${item.id}`} cast={item} />
+              ))}
+            <div className="flex-center min-w-[70px] text-sm">
+              <Link href={`/${type}/${movieId}/cast`} className="hover:text-blue-400 group duration-300">
+                <span>View all cast</span>
+                <MdKeyboardArrowRight className="ml-2 group-hover:ml-4 inline-block duration-150" />
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

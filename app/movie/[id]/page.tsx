@@ -88,8 +88,8 @@ const MovieDetail = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
         <div className="space-y-10">
-          <MoviesOrTvCardWrapper type="movie" sectionTitle="Recommended Movies" apiEndpoint={`/movie/${movie.id}/recommendations`} keyPrefix="recommendationsMovieDetails" loadingState={<p>Loading Recommended</p>} />
-          <MoviesOrTvCardWrapper type="movie" sectionTitle="Similar Movies" apiEndpoint={`/movie/${movie.id}/similar`} keyPrefix="similarMovieDetails" loadingState={<p>Loading Similar</p>} />
+          <MoviesOrTvCardWrapper type="movie" sectionTitle="Recommended Movies" apiEndpoint={`/movie/${movie.id}/recommendations`} keyPrefix="recommendationsMovieDetails" />
+          <MoviesOrTvCardWrapper type="movie" sectionTitle="Similar Movies" apiEndpoint={`/movie/${movie.id}/similar`} keyPrefix="similarMovieDetails" />
         </div>
       </div>
     </>

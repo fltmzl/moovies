@@ -2,6 +2,8 @@
 
 import MovieCard from "@/components/card/MovieCard";
 import SmallMovieCard from "@/components/card/SmallMovieCard";
+import LargeCardSkeleton from "@/components/loading/LargeCardSkeleton";
+import SmallCardSkeleton from "@/components/loading/SmallCardSkeleton ";
 import { fetcher } from "@/utils";
 import Link from "next/link";
 import useSWR from "swr";
@@ -9,18 +11,13 @@ import useSWR from "swr";
 interface IProps {
   sectionTitle: string;
   apiEndpoint: string;
-  loadingState: React.ReactNode;
   keyPrefix: string;
   cardSize?: "sm" | "lg";
   type: "movie" | "tv";
 }
 
-const MoviesOrTvCardWrapper = ({ apiEndpoint, cardSize = "sm", keyPrefix, loadingState, type, sectionTitle }: IProps) => {
+const MoviesOrTvCardWrapper = ({ apiEndpoint, cardSize = "sm", keyPrefix, type, sectionTitle }: IProps) => {
   const { data, isLoading, error } = useSWR(apiEndpoint, fetcher);
-
-  if (isLoading) {
-    return <>{loadingState}</>;
-  }
 
   if (error) return <>{error}</>;
 
@@ -32,18 +29,31 @@ const MoviesOrTvCardWrapper = ({ apiEndpoint, cardSize = "sm", keyPrefix, loadin
           View All
         </Link>
       </div>
+
       <section className="card-movie-container">
         {cardSize === "sm" ? (
           <>
-            {data?.results?.map((movie: Movie) => (
-              <SmallMovieCard key={`${keyPrefix}-${movie.id}`} type={type} data={movie} />
-            ))}
+            {isLoading ? (
+              <SmallCardSkeleton />
+            ) : (
+              <>
+                {data?.results?.map((movie: Movie) => (
+                  <SmallMovieCard key={`${keyPrefix}-${movie.id}`} type={type} data={movie} />
+                ))}
+              </>
+            )}
           </>
         ) : (
           <>
-            {data?.results?.map((movie: Movie) => (
-              <MovieCard key={`${keyPrefix}-${movie.id}`} type={type} data={movie} />
-            ))}
+            {isLoading ? (
+              <LargeCardSkeleton />
+            ) : (
+              <>
+                {data?.results?.map((movie: Movie) => (
+                  <MovieCard key={`${keyPrefix}-${movie.id}`} type={type} data={movie} />
+                ))}
+              </>
+            )}
           </>
         )}
       </section>

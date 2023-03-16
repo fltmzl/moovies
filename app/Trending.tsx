@@ -4,31 +4,7 @@ import MovieCard from "@/components/card/MovieCard";
 import useSWR from "swr";
 import { fetcher } from "@/utils";
 import { useState } from "react";
-
-const Skeleton = () => {
-  return (
-    <div className="flex flex-nowrap gap-5 overflow-hidden">
-      <div className="flex-y-center min-w-[660px] aspect-[16/7] rounded-2xl px-5 bg-gray-500/20 animate-pulse ">
-        <div className="basis-2/5">
-          <div className="w-[200px] h-[250px] rounded-2xl bg-gray-500/30"></div>
-        </div>
-        <div className="basis-full"></div>
-      </div>
-      <div className="flex-y-center min-w-[660px] aspect-[16/7] rounded-2xl px-5 bg-gray-500/20 animate-pulse ">
-        <div className="basis-2/5">
-          <div className="w-[200px] h-[250px] rounded-2xl bg-gray-500/30"></div>
-        </div>
-        <div className="basis-full"></div>
-      </div>
-      <div className="flex-y-center min-w-[660px] aspect-[16/7] rounded-2xl px-5 bg-gray-500/20 animate-pulse ">
-        <div className="basis-2/5">
-          <div className="w-[200px] h-[250px] rounded-2xl bg-gray-500/30"></div>
-        </div>
-        <div className="basis-full"></div>
-      </div>
-    </div>
-  );
-};
+import LargeCardSkeleton from "@/components/loading/LargeCardSkeleton";
 
 type MediaState = "all" | "movie" | "tv";
 type TimeState = "day" | "week";
@@ -71,16 +47,18 @@ const TrendingMovies = () => {
         </div>
       </div>
 
-      {isLoading ? (
-        <Skeleton />
-      ) : (
-        <div className="card-movie-container">
-          {data.results.map((movie: Movie & TV) => {
-            const type = movie.title ? "movie" : "tv";
-            return <MovieCard key={`trendingMovies-${movie.id}`} type={type} data={movie} />;
-          })}
-        </div>
-      )}
+      <div className="card-movie-container">
+        {isLoading ? (
+          <LargeCardSkeleton />
+        ) : (
+          <>
+            {data.results.map((movie: Movie & TV) => {
+              const type = movie.title ? "movie" : "tv";
+              return <MovieCard key={`trendingMovies-${movie.id}`} type={type} data={movie} />;
+            })}
+          </>
+        )}
+      </div>
     </section>
   );
 };

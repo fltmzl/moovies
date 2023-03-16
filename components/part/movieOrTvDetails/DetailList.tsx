@@ -19,8 +19,6 @@ const DetailCard = ({ label, value, children }: { label: string; value?: any; ch
 const DetailList = ({ movieDetail, type }: { movieDetail: MovieDetail; type: "movie" | "tv" }) => {
   const { data, isLoading, error } = useSWR<ExternalIDs>(`/${type}/${movieDetail.id}/external_ids`, fetcher);
 
-  if (isLoading) return <p>Loading Social...</p>;
-
   return (
     <section>
       <h2 className="text-xl font-semibold mb-5 pb-3 border-b border-slate-400/10">Details</h2>
